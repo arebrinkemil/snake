@@ -14,7 +14,6 @@ class Game
     private Direction direction;
     private List<Point> snake;
     private Point food;
-    private Point poison;
     private Random random;
     private int score;
 
@@ -31,7 +30,6 @@ class Game
         score = 0;
 
         PlaceFood();
-        // PlacePoison();
         InitializeSnake();
     }
 
@@ -40,7 +38,6 @@ class Game
         //kör till gameover
         while (!isGameOver)
         {
-            //om input 
             if (Console.KeyAvailable)
             {
                 HandleInput();
@@ -50,10 +47,8 @@ class Game
             Move();
             Draw();
             
-             //pause i loopen
         }
 
-        //game over screen
         Console.Clear();
         Console.WriteLine("\n                 *          )            (     \n (       (     (  `      ( /(            )\\ )  \n )\\ )    )\\    )\\))(  (  )\\())(   (  (  (()/(  \n(()/( ((((_)( ((_)()\\ )\\((_)\\ )\\  )\\ )\\  /(_)) \n /(_))_)\\ _ )\\(_()((_|(_) ((_|(_)((_|(_)(_))   \n(_)) __(_)_\\(_)  \\/  | __/ _ \\ \\ / /| __| _ \\  \n  | (_ |/ _ \\ | |\\/| | _| (_) \\ V / | _||   /  \n   \\___/_/ \\_\\|_|  |_|___\\___/ \\_/  |___|_|_\\  \n                                               \n");
         Console.WriteLine($"Your score: {score}");
@@ -81,16 +76,7 @@ class Game
         food = new Point(x, y);
     }
 
-    // private void PlacePoison()
-    // {
-    //     
-    //     int x = random.Next(0, Width);
-    //     int y = random.Next(0, Height);
-    //
-    //     
-    //     poison = new Point(x, y);
-    // }
-    
+  
     
 
     private void HandleInput()
@@ -163,17 +149,12 @@ class Game
             return;
         }
         
-        //nuddar huvvet mat. lägg till poäng + placera ny
         if (newHead.Equals(food))
         {
             score++;
             PlaceFood();
         }
-        // else if (newHead.Equals(poison))
-        // {
-        //     isGameOver = true;
-        //     return;
-        // }
+        
         else
         {
             snake.RemoveAt(snake.Count - 1);
@@ -181,10 +162,7 @@ class Game
 
         snake.Insert(0, newHead);
         
-        // if (score % 10 == 0)
-        // {
-        //     PlacePoison();
-        // }
+       
     }
 
 
@@ -220,11 +198,7 @@ class Game
                     symbol = 'O';  
                 }
                 
-                // if (poison.X == x && poison.Y == y)
-                // {
-                //     symbol = 'X';  
-                // }
-
+               
                 Console.Write(symbol);  
             }
 
